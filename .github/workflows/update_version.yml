@@ -28,7 +28,6 @@ jobs:
       run: |
         TAG_INFO="$(curl -H "Authorization: $GITHUB_TOKEN" -sL "https://api.github.com/repos/shadowsocks/shadowsocks-rust/releases/latest")"
         [ -n "$TAG_INFO" ] || exit 1
-        echo "TAG_INFO=$TAG_INFO" >> $GITHUB_ENV
         VERSION="$(jq -r ".tag_name" <<< "$TAG_INFO" | tr -d 'v')"
         PKG_VERSION="$(awk -F "PKG_VERSION:=" '{print $2}' "$GITHUB_WORKSPACE/Makefile" | xargs)"
         echo "Shadowsocks-Rust Local version: $PKG_VERSION, Latest version: $VERSION" 
