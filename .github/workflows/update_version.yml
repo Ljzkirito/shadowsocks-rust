@@ -28,6 +28,8 @@ jobs:
         VERSION="$(jq -r ".tag_name" <<< "$TAG_INFO" | tr -d 'v')" >> $GITHUB_ENV
         PKG_VERSION="$(awk -F "PKG_VERSION:=" '{print $2}' "$GITHUB_WORKSPACE/Makefile" | xargs)" >> $GITHUB_ENV
         echo "Shadowsocks-Rust Local version: $PKG_VERSION, Latest version: $VERSION" 
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "PKG_VERSION=$PKG_VERSION" >> $GITHUB_ENV
 
     - name: Push Commits
       if: env.VERSION != env.PKG_VERSION
