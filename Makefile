@@ -6,7 +6,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=shadowsocks-rust
-PKG_VERSION:=1.22.0
+PKG_VERSION:=1.23.2
 PKG_RELEASE:=1
 
 PKG_SOURCE_HEADER:=shadowsocks-v$(PKG_VERSION)
@@ -16,23 +16,23 @@ PKG_SOURCE_URL:=https://github.com/shadowsocks/shadowsocks-rust/releases/downloa
 
 ifeq ($(ARCH),aarch64)
   PKG_SOURCE:=$(PKG_SOURCE_HEADER).aarch64-$(PKG_SOURCE_BODY).$(PKG_SOURCE_FOOTER)
-  PKG_HASH:=4c20c76ff80e7671428068a1628b6269785fc0d22a127883ed82e2c79e6c332e
+  PKG_HASH:=8462ec05ead8cb6e13dfdc22a813518859da790dbab9a3f716f236a198103aac
 else ifeq ($(ARCH),arm)
   # Referred to golang/golang-values.mk
   ARM_CPU_FEATURES:=$(word 2,$(subst +,$(space),$(call qstrip,$(CONFIG_CPU_TYPE))))
   ifeq ($(ARM_CPU_FEATURES),)
     PKG_SOURCE:=$(PKG_SOURCE_HEADER).arm-$(PKG_SOURCE_BODY)eabi.$(PKG_SOURCE_FOOTER)
-    PKG_HASH:=6724fcb42326b003e542fc2df6594dbd28259dc3df7644033844d6d7cba98b61
+    PKG_HASH:=bc07650d508fd4e558bc5aae95edf80e98f5453dc7fac9a2d0a53fb032e8dc3e
   else
     PKG_SOURCE:=$(PKG_SOURCE_HEADER).arm-$(PKG_SOURCE_BODY)eabihf.$(PKG_SOURCE_FOOTER)
-    PKG_HASH:=3af6c4e3e28b92957b869a6851296f882f906f30285cf9247ad59f163ce9d808
+    PKG_HASH:=b1b11b6ee6562075f7948f3386adb5b9dbf49701dda2298c56c1a211be1b9324
   endif
 else ifeq ($(ARCH),i386)
   PKG_SOURCE:=$(PKG_SOURCE_HEADER).i686-$(PKG_SOURCE_BODY).$(PKG_SOURCE_FOOTER)
-  PKG_HASH:=01419d65ea1dcc41c103bc83601eda7dd7ce311f50097c826aa3262c539c3af3
+  PKG_HASH:=9ba74e19d3ad0baf1c28b4cd46cafc8dbce5ce839ff589e16c1be2d64ddc29e4
 else ifeq ($(ARCH),x86_64)
   PKG_SOURCE:=$(PKG_SOURCE_HEADER).x86_64-$(PKG_SOURCE_BODY).$(PKG_SOURCE_FOOTER)
-  PKG_HASH:=5e3f4a7c78ffeb612620c5cfd4a99a25d1eabffbe9e00ce5a92ee72e99d1310b
+  PKG_HASH:=c4d528b32639c0da77e93a8ec1cc19f01143af7105ad352f9a6c6257d90a9a17
 # Set the default value to make OpenWrt Package Checker happy
 else
   PKG_SOURCE:=dummy
